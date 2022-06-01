@@ -1,4 +1,3 @@
-from statistics import mode
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
@@ -20,3 +19,11 @@ class Animal(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class Breed(BaseModel):
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return f'{self.name} - {self.animal.name}'
