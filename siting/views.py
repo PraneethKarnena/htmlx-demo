@@ -74,7 +74,7 @@ class SitingView(View):
 
             _ = Siting.objects.get(id=siting_id).delete()
 
-            return JsonResponse({'success': True})
+            return HttpResponse(self.get_sitings())
 
         except Exception as e:
-            return JsonResponse({'success': False, 'data': str(e)})
+            return HttpResponse(f'Error: {str(e)}')
