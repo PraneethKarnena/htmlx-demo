@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -32,8 +32,22 @@ class BreedView(View):
 class SitingView(View):
     http_method_names = ['get', 'post', 'delete']
 
+    def get_sitings(self):
+        response = ''
+        sitings = Siting.objects.all()
+        for idx, siting in enumerate(sitings):
+            response += f'''<tr>
+                            <th scope="row">{idx+1}</th>
+                            <td>{siting.breed.animal.name}</td>
+                            <td>{siting.breed.name}</td>
+                            <td>{siting.date}</td>
+                            <td><button hx-trigger="click" hx-delete="/sitings/?siting_id={siting.id}" class="btn btn-sm btn-danger" type="button">DELETE</button></td>
+                            </tr>'''
+        
+        return response
+
     def get(self, request):
-        return JsonResponse({'success': True, 'data': list(Siting.objects.values('breed__name', 'id', 'date', 'breed__animal__name'))})
+        return HttpResponse(self.get_sitings())
 
 
     def post(self, request):
