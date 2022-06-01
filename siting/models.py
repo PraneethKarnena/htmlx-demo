@@ -33,3 +33,11 @@ class Breed(BaseModel):
 
     def __str__(self):
         return f'{self.name} - {self.animal.name}'
+
+
+class Siting(BaseModel):
+    breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
+    date = models.DateField()
+
+    def __str__(self):
+        return f'{self.breed.name} - {self.breed.animal.name} - {self.date}'
