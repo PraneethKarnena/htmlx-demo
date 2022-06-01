@@ -41,7 +41,7 @@ class SitingView(View):
                             <td>{siting.breed.animal.name}</td>
                             <td>{siting.breed.name}</td>
                             <td>{siting.date}</td>
-                            <td><button hx-trigger="click" hx-delete="/sitings/?siting_id={siting.id}" class="btn btn-sm btn-danger" type="button">DELETE</button></td>
+                            <td><button hx-trigger="click" hx-delete="/sitings/?siting_id={siting.id}" hx-target="#sitings_list" class="btn btn-sm btn-danger" type="button">DELETE</button></td>
                             </tr>'''
         
         return response
@@ -59,10 +59,10 @@ class SitingView(View):
                 raise Exception('breed_id and date are required!')
 
             _ = Siting.objects.create(breed_id=breed_id, date=date)
-            return JsonResponse({'success': True})
+            return HttpResponse(self.get_sitings())
 
         except Exception as e:
-            return JsonResponse({'success': False, 'data': str(e)})
+            return HttpResponse(f'Error: {str(e)}')
 
 
     def delete(self, request):
