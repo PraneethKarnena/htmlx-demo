@@ -22,7 +22,7 @@ class BreedView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class SitingView(View):
-    http_method_names = ['get', 'post']
+    http_method_names = ['get', 'post', 'delete']
 
     def get(self, request):
         return JsonResponse({'success': True, 'data': list(Siting.objects.values('breed__name', 'id', 'date', 'breed__animal__name'))})
@@ -37,6 +37,21 @@ class SitingView(View):
                 raise Exception('breed_id and date are required!')
 
             _ = Siting.objects.create(breed_id=breed_id, date=date)
+            return JsonResponse({'success': True})
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'data': str(e)})
+
+
+    def delete(self, request):
+        try:
+            siting_id = request.GET.get('siting_id', None)
+
+            if siting_id is None:
+                raise Exception('Siting ID is required!')
+
+            _ = Siting.objects.get(id=siting_id).delete()
+
             return JsonResponse({'success': True})
 
         except Exception as e:
