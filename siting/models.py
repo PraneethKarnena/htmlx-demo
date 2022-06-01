@@ -17,6 +17,9 @@ class BaseModel(models.Model):
 class Animal(BaseModel):
     name = models.CharField(max_length=255, unique=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -24,6 +27,9 @@ class Animal(BaseModel):
 class Breed(BaseModel):
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, unique=True)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return f'{self.name} - {self.animal.name}'
