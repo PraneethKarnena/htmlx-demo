@@ -1,3 +1,4 @@
+from statistics import mode
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
@@ -12,7 +13,3 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
         ordering = ['-created_at']
-
-
-class User(AbstractUser, BaseModel):
-    pass
