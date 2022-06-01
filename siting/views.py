@@ -1,9 +1,17 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from siting.models import Animal, Breed, Siting
+
+
+class HomeView(View):
+    http_method_names = ['get']
+
+    def get(self, request):
+        return render(request, 'siting/home.html')
 
 
 class AnimalView(View):
