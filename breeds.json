@@ -1,0 +1,54 @@
+{
+    "Dog": [
+        "Labrador",
+        "German Shepherd",
+        "Golden Retriever",
+        "Bulldog",
+        "Beagle",
+        "Boxer",
+        "Dachshund",
+        "Great Dane"
+    ],
+    "Cat": [
+        "Bengal",
+        "Bombay",
+        "Persian",
+        "Russian",
+        "Savannah",
+        "Siamese",
+        "Sphynx"
+    ],
+    "Bird": [
+        "Woodpecker",
+        "Pigeon",
+        "Peacock",
+        "Rooster",
+        "Vulture",
+        "Swallow",
+        "Seagull",
+        "Quail",
+        "Duck",
+        "Pelican",
+        "Magpie",
+        "Parrot",
+        "Turkey",
+        "Crane",
+        "Kingfisher",
+        "Hummingbird",
+        "Sparrow",
+        "Cormorant",
+        "Ostrich",
+        "Crow"
+    ],
+    "Rabbit": [
+        "Tan",
+        "Jersey Wooly",
+        "English Lop",
+        "Beveren",
+        "Chinchilla",
+        "Himalayan",
+        "Belgian",
+        "Sable",
+        "Silver Fox"
+    ]
+}
