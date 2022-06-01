@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -13,3 +14,5 @@ class BaseModel(models.Model):
         ordering = ['-created_at']
 
 
+class User(AbstractUser, BaseModel):
+    pass
