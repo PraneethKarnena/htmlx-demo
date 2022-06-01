@@ -9,3 +9,10 @@ class AnimalView(View):
 
     def get(self, request):
         return JsonResponse({'success': True, 'data': list(Animal.objects.values('name', 'id'))})
+
+
+class BreedView(View):
+    http_method_names = ['get']
+
+    def get(self, request, animal_id):
+        return JsonResponse({'success': True, 'data': list(Breed.objects.filter(animal_id=animal_id).values('name', 'id', 'animal__name'))})
