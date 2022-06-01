@@ -5,6 +5,7 @@ from siting.models import Animal, Breed
 
 
 class AnimalView(View):
+    http_method_names = ['GET']
 
     def get(self, request):
         return JsonResponse({'success': True, 'data': list(Animal.objects.values('name', 'id'))})
