@@ -29,13 +29,20 @@ class AnimalView(View):
                             <select class="form-control" id="animalInput" name="animal_id" hx-trigger="change" hx-post="/breeds/" hx-target="#breedsList" required>
                                 {animals_list}
                             </select>
+                            <div id="breedsList"></div>
+                            <button type="button" class="btn btn-primary mt-2">Save</button>
+                            <button type="button" class="btn btn-danger mt-2 ml-2" hx-trigger="click" hx-get="/breeds/" hx-target="#animalsList">Cancel</button>
                         </div>'''
         return HttpResponse(response)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class BreedView(View):
-    http_method_names = ['post']
+    http_method_names = ['get', 'post']
+
+
+    def get(self, request):
+        return HttpResponse('')
 
     def post(self, request):
         animal_id = request.POST.get('animal_id', None)
@@ -49,14 +56,14 @@ class BreedView(View):
         for breed in breeds:
             breeds_list += f'<option value="{breed.id}">{breed.name}</option>'
 
-        response = f'''<div class="form-group">
+        response = f'''<div class="form-group mt-2">
                             <label for="breedInput">Breed</label>
-                            <select class="form-control" id="breedInput" name="breed_id" hx-trigger="change" hx-get="/breeds/" required>
+                            <select class="form-control" id="breedInput" name="breed_id" hx-trigger="change" hx-get="/breeds/" hx-target="#submitBtn" required>
                                 {breeds_list}
                             </select>
                         </div>'''
                         
-        return HttpResponse(response) 
+        return HttpResponse(response)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
