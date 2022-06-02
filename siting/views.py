@@ -31,7 +31,7 @@ class AnimalView(View):
                             </select>
                         </div>
                             <div id="breedsList"></div>
-                            <button type="button" class="btn btn-primary mt-2">Save</button>
+                            <button type="submit" class="btn btn-primary mt-2" >Save</button>
                             <button type="button" class="btn btn-danger mt-2 ml-2" hx-trigger="click" hx-get="/breeds/" hx-target="#animalsList">Cancel</button>
                         '''
         return HttpResponse(response)
@@ -111,7 +111,7 @@ class SitingView(View):
                 raise Exception('breed_id and date are required!')
 
             _ = Siting.objects.create(breed_id=breed_id, date=date)
-            return HttpResponse(self.get_sitings())
+            return HttpResponse('')
 
         except Exception as e:
             return HttpResponse(f'Error: {str(e)}')

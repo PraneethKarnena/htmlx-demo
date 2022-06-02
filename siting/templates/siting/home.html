@@ -31,7 +31,7 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
                 <table class="table" hx-get="{% url 'siting:sitings_list' %}" hx-target="#sitings_list"
-                    hx-trigger="load">
+                    hx-trigger="load, every 1s">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
@@ -57,7 +57,7 @@
         <div class="row mt-4">
             <div class="col-lg-1"></div>
             <div class="col-lg-4">
-                <form method="post" action="{% url 'siting:sitings_list' %}">
+                <form hx-post="{% url 'siting:sitings_list' %}" hx-target="#animalsList">
                     <div id="animalsList"></div>                    
                 </form>
             </div>
