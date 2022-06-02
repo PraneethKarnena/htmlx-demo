@@ -26,7 +26,7 @@ class AnimalView(View):
 
         response = f'''<div class="form-group">
                             <label for="animalInput">Animal</label>
-                            <select class="form-control" id="animalInput" name="animal_id">
+                            <select class="form-control" id="animalInput" name="animal_id" hx-trigger="change" hx-post="/breeds/">
                                 {animals_list}
                             </select>
                         </div>'''
