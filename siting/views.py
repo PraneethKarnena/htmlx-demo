@@ -26,18 +26,37 @@ class AnimalView(View):
 
         response = f'''<div class="form-group">
                             <label for="animalInput">Animal</label>
-                            <select class="form-control" id="animalInput" name="animal_id" hx-trigger="change" hx-post="/breeds/">
+                            <select class="form-control" id="animalInput" name="animal_id" hx-trigger="change" hx-post="/breeds/" hx-target="#breedsList" required>
                                 {animals_list}
                             </select>
                         </div>'''
         return HttpResponse(response)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class BreedView(View):
-    http_method_names = ['get']
+    http_method_names = ['post']
 
-    def get(self, request, animal_id):
-        return JsonResponse({'success': True, 'data': list(Breed.objects.filter(animal_id=animal_id).values('name', 'id'))})
+    def post(self, request):
+        animal_id = request.POST.get('animal_id', None)
+
+        if animal_id is None:
+            return HttpResponse('Error: Animal ID is required')
+
+        breeds_list = '<option value=""></option>'
+        breeds = Breed.objects.filter(animal_id=animal_id)
+
+        for breed in breeds:
+            breeds_list += f'<option value="{breed.id}">{breed.name}</option>'
+
+        response = f'''<div class="form-group">
+                            <label for="breedInput">Breed</label>
+                            <select class="form-control" id="breedInput" name="breed_id" hx-trigger="change" hx-get="/breeds/" required>
+                                {breeds_list}
+                            </select>
+                        </div>'''
+                        
+        return HttpResponse(response) 
 
 
 @method_decorator(csrf_exempt, name='dispatch')
