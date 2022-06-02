@@ -8,6 +8,7 @@
     <title>HTMX - Demo</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.7.0/htmx.min.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,8 @@
         <div class="row mt-4">
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
-                <table class="table">
+                <table class="table" hx-get="{% url 'siting:sitings_list' %}" hx-target="#sitings_list"
+                    hx-trigger="load">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
@@ -39,16 +41,27 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td><button class="btn btn-sm btn-danger" type="button">DELETE</button></td>
-                        </tr>
+                    <tbody id="sitings_list">
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <button type="button" class="btn btn-primary btn-lg" hx-trigger="click" hx-get="{% url 'siting:animals_list' %}" hx-target="#animalsList">New</button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                <form method="post" action="{% url 'siting:sitings_list' %}">
+                    <div id="animalsList">
+                        
+                    </div>
+                </form>
             </div>
         </div>
     </div>
