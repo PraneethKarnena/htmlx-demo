@@ -18,7 +18,19 @@ class AnimalView(View):
     http_method_names = ['get']
 
     def get(self, request):
-        return JsonResponse({'success': True, 'data': list(Animal.objects.values('name', 'id'))})
+        animals = Animal.objects.all()
+        animals_list = '<option value=""></option>'
+
+        for animal in animals:
+            animals_list += f'<option value="{animal.id}">{animal.name}</option>'
+
+        response = f'''<div class="form-group">
+                            <label for="animalInput">Animal</label>
+                            <select class="form-control" id="animalInput" name="animal_id">
+                                {animals_list}
+                            </select>
+                        </div>'''
+        return HttpResponse(response)
 
 
 class BreedView(View):
