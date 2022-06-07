@@ -57,8 +57,13 @@
         <div class="row mt-4">
             <div class="col-lg-1"></div>
             <div class="col-lg-4">
+                <div id="message"></div>
                 <form hx-post="{% url 'siting:sitings_list' %}" hx-target="#animalsList">
-                    <div id="animalsList"></div>                    
+                    <div class="form-group">
+                        <label for="dateInput">Date</label>
+                        <input type="date" class="form-control" id="dateInput" name="date" required>
+                    </div>
+                    <div id="animalsList"></div>            
                 </form>
             </div>
         </div>

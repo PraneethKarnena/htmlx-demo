@@ -39,5 +39,8 @@ class Siting(BaseModel):
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
     date = models.DateField()
 
+    class Meta:
+        unique_together = [['breed_id', 'date',]]
+
     def __str__(self):
         return f'{self.breed.name} - {self.breed.animal.name} - {self.date}'

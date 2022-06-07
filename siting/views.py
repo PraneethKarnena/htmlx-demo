@@ -31,7 +31,7 @@ class AnimalView(View):
                             </select>
                         </div>
                             <div id="breedsList"></div>
-                            <button type="submit" class="btn btn-primary mt-2" >Save</button>
+                            <button type="submit" class="btn btn-primary mt-2" hx-target="#message">Save</button>
                             <button type="button" class="btn btn-danger mt-2 ml-2" hx-trigger="click" hx-get="/breeds/" hx-target="#animalsList">Cancel</button>
                         '''
         return HttpResponse(response)
@@ -58,11 +58,11 @@ class BreedView(View):
 
         response = f'''<div class="form-group">
                             <label for="breedInput">Breed</label>
-                            <select class="form-control" id="breedInput" name="breed_id" hx-trigger="change" hx-get="/dates/" hx-target="#dateList" required>
+                            <select class="form-control" id="breedInput" name="breed_id"  required>
                                 {breeds_list}
                             </select>
                         </div>
-                        <div id="dateList"></div>
+                        
                         '''
                         
         return HttpResponse(response)
@@ -110,7 +110,11 @@ class SitingView(View):
             if None in (breed_id, date):
                 raise Exception('breed_id and date are required!')
 
-            _ = Siting.objects.create(breed_id=breed_id, date=date)
+            _, created = Siting.objects.get_or_create(breed_id=breed_id, date=date)
+
+            if not created:
+                return HttpResponse('Record already exists')
+
             return HttpResponse('')
 
         except Exception as e:
