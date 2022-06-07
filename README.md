@@ -8,7 +8,7 @@ A simple project to demonstrate HTMX.
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env (moe .env.example to .env) file
+To run this project, you will need to add the following environment variables to your .env (move .env.example to .env) file
 
 `DEBUG`
 
@@ -22,13 +22,13 @@ To run this project, you will need to add the following environment variables to
 Clone the project
 
 ```bash
-  git clone https://github.com/PraneethKarnena/htmlx-demo.git
+  git clone https://github.com/PraneethKarnena/htmx-demo.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd htmlx-demo
+  cd htmx-demo
 ```
 
 Install requirements
